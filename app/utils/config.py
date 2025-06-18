@@ -40,6 +40,7 @@ class RedisQueueConfig:
     port: str
     db: int
     queue_name: str
+    workers_count: int
 
 
 @dataclass
@@ -157,7 +158,7 @@ class PopulationRestoratorApiConfig:
                 ),
                 fertility_interval=FertilityInterval(start=18, end=40),
             ),
-            redis_queue=RedisQueueConfig(host="localhost", port="6379", db=0, queue_name="default"),
+            redis_queue=RedisQueueConfig(host="localhost", port="6379", db=0, queue_name="default", workers_count=1),
             logging=LoggingConfig(level="INFO"),
             urban_api=ApiConfig(
                 host="https://urban-api.idu.kanootoko.org",
