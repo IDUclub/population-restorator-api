@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 
 import multiprocess as mp
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.handlers.routers import routers_list
 from app.http_clients import SavingClient, SocDemoClient, UrbanClient
@@ -21,7 +22,7 @@ def get_app(prefix: str = "/api") -> FastAPI:
     app = FastAPI(
         title="Population-restorator-api",
         description=desc,
-        version="1.0.1 blue mountain",
+        version="1.0.2 green valley",
         contact={"name": "Banakh Andrei", "email": "uuetsukeu@mail.ru"},
         license_info={"name": "MIT"},
         lifespan=lifespan,
@@ -40,6 +41,16 @@ def get_app(prefix: str = "/api") -> FastAPI:
         LoggingMiddleware,
     )
     app.add_middleware(ExceptionHandlerMiddleware, debug=(app_config.app.debug,))
+
+    origins = ["*"]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["GET", "POST"],
+        allow_headers=["*"],
+    )
 
     return app
 
