@@ -8,8 +8,8 @@ population_restorator:
     start: 18
     end: 45
   working_dirs:
-    divide_working_db_path: "./test.db"
-    forecast_working_dir_path: "./calculation_dbs/"
+    divide_working_db_path: "/home/banakh/work/population-restorator-api/test.db"
+    forecast_working_dir_path: "/home/banakh/calculation_dbs/"
 logging:
   level: "INFO"
   files:
@@ -17,13 +17,12 @@ logging:
       level: "INFO"
     - filename: "logs/error.log"
       level: "ERROR"
-    - filename: "logs/debug.log"
-      level: "DEBUG"
 redis_queue:
   host: "localhost"
   port: 6379
   db: 0
   queue_name: "default"
+  workers_count: 2
 urban_api:
   host: "https://urban-api.idu.kanootoko.org"
   port: 443
