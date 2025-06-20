@@ -8,8 +8,8 @@ population_restorator:
     start: 18
     end: 45
   working_dirs:
-    divide_working_db_path: "/home/banakh/work/population-restorator-api/test.db"
-    forecast_working_dir_path: "/home/banakh/calculation_dbs/"
+    divide_working_db_path: "./test.db"
+    forecast_working_dir_path: "./calculation_dbs/"
 logging:
   level: "INFO"
   files:
@@ -18,7 +18,7 @@ logging:
     - filename: "logs/error.log"
       level: "ERROR"
 redis_queue:
-  host: "localhost"
+  host: "redis"
   port: 6379
   db: 0
   queue_name: "default"

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./logs:/app/logs
+      - ./calculation_dbs:/app/calculation_dbs
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6380:6379"
