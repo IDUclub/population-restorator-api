@@ -32,7 +32,7 @@ class SavingClient(BaseClient):
     def __post_init__(self):
         if not (self.config.host.startswith("http")):
             logger.warning("http/https schema is not set, defaulting to http")
-            self.config.host = f"http://{self.config.host}"
+            self.config.host = f"http://{self.config.host}:{self.config.port}"
 
     def __str__(self):
         return "SavingClient"
@@ -45,7 +45,7 @@ class SavingClient(BaseClient):
         chunks_count = ceil(len(houses_data) / chunk_size)
         semaphore = Semaphore(semaphore_size)
 
-        url = f"{self.config.host}/api/v1/distribution/create-many"
+        url = f"{self.config.host}:{self.config.port}/api/v1/distribution/create-many"
         headers = {
             "accept": "application/json",
         }
@@ -79,7 +79,7 @@ class SavingClient(BaseClient):
         buildings_ids: dict[int, set[int]],
     ):
 
-        base_url = f"{self.config.host}/api/v1/distribution/many"
+        base_url = f"{self.config.host}:{self.config.port}/api/v1/distribution/many"
 
         params = {
             "scenario": scenario

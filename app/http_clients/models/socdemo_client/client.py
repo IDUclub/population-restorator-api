@@ -28,7 +28,7 @@ class SocDemoClient(BaseClient):
     def __post_init__(self):
         if not (self.config.host.startswith("http")):
             logger.warning("http/https schema is not set, defaulting to http")
-            self.config.host = f"http://{self.config.host}"
+            self.config.host = f"http://{self.config.host}:{self.config.port}"
 
     def __str__(self):
         return "SocDemoClient"
@@ -61,7 +61,7 @@ class SocDemoClient(BaseClient):
         }
 
         # getting response
-        url = f"{self.config.host}/indicators/{indicator_id}/{territory_id}/detailed"
+        url = f"{self.config.host}:{self.config.port}/indicators/{indicator_id}/{territory_id}/detailed"
         data = await handle_get_request(url, params, headers)
 
         if data is None:
