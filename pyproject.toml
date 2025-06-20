@@ -1,43 +1,36 @@
-[project]
+[tool.poetry]
 name = "population-restorator-api"
-version = "1.0.1"
+version = "1.0.3"
 description = "todo"
 authors = [
-    {name = "Banakh Andrei",email = "uuetsukeu@mail.ru"}
+    "Banakh Andrei <uuetsukeu@mail.ru>"
 ]
-license = {text = "MIT"}
+license = "MIT"
 readme = "README.md"
-requires-python = "^3.9"
-dependencies = [
-    "fastapi (>=0.115.8,<0.116.0)",
-    "uvicorn (>=0.34.0,<0.35.0)",
-    "python-dotenv (>=1.0.1,<2.0.0)",
-    "isort (>=6.0.0,<7.0.0)",
-    "pylint (>=3.3.4,<4.0.0)",
-    "black (>=25.1.0,<26.0.0)",
-    "geojson (>=3.2.0,<4.0.0)",
-    "click (>=8.1.8,<9.0.0)",
-    "aiohttp (>=3.11.12,<4.0.0)",
-    "pandas (>=2.2.3,<3.0.0)",
-    "structlog (>=25.1.0,<26.0.0)",
-    "pyyaml (>=6.0.2,<7.0.0)",
-    "redis (>=5.2.1,<6.0.0)",
-    "rq (>=2.1.0,<3.0.0)",
-    "asyncpg (>=0.30.0,<0.31.0)",
-    "multiprocess (>=0.70.17,<0.71.0)",
-    "population_restorator"
-]
-
-
-[tool.poetry.dependencies]
-population_restorator = { git = "https://github.com/drlinggg/population-restorator.git" }
-
-
-[tool.poetry]
 packages = [{ include = "app" }]
 
 [tool.poetry.scripts]
 launch_population-restorator-api = "app.__main__:main"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = ">=0.115.8,<0.116.0"
+uvicorn = ">=0.34.0,<0.35.0"
+python-dotenv = ">=1.0.1,<2.0.0"
+isort = ">=6.0.0,<7.0.0"
+pylint = ">=3.3.4,<4.0.0"
+black = ">=25.1.0,<26.0.0"
+geojson = ">=3.2.0,<4.0.0"
+click = ">=8.1.8,<9.0.0"
+aiohttp = ">=3.11.12,<4.0.0"
+pandas = ">=2.2.3,<3.0.0"
+structlog = ">=25.1.0,<26.0.0"
+pyyaml = ">=6.0.2,<7.0.0"
+redis = ">=5.2.1,<6.0.0"
+rq = ">=2.1.0,<3.0.0"
+asyncpg = ">=0.30.0,<0.31.0"
+multiprocess = ">=0.70.17,<0.71.0"
+population_restorator = { git = "https://github.com/drlinggg/population-restorator.git", branch = "main" }
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -52,7 +45,6 @@ max-line-length = 120
 disable = ["duplicate-code"]
 expected-line-ending-format = "LF"
 
-
 [tool.isort]
 force_grid_wrap = 0
 lines_after_imports = 2
@@ -63,4 +55,3 @@ ensure_newline_before_comments = true
 include_trailing_comma = true
 split_on_trailing_comma = true
 py_version = 39
-

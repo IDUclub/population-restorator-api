@@ -62,7 +62,7 @@ class SavingClient(BaseClient):
                     json={"dtos": chunk_data},
                     session=session
                 )
-                logger.info(f"Sent {chunk_id} chunk of {chunks_count}")
+                logger.info(f"Sent {chunk_id+1} chunk of {chunks_count}")
 
         tasks = [
             send_chunk(chunk_id)
