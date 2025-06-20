@@ -222,36 +222,45 @@ class TerritoriesService:
             year_begin: int, first year was saved
             years: int, for how many years saving was
         """
+
         buildings_ids: dict[int, set[int]] = {
             year: set()
             for year in range(year_begin+1, year_begin+years+1)
         }
-
+        
+        """
+        get all house ids saved in db for given interval
+        """
         buildings_db_data = await self.get_forecasted_data(input_dir, territory_id, year_begin, years, scenario)
-        for key, values in buildings_db_data.items():
+        for _, values in buildings_db_data.items():
             year = next(iter(values)).year
             for house in values:
                 buildings_ids[year].add(house.building_id)
 
-        building_ids_urban_api: dict[int, set[int]] = {}
-        for index, house in (await self.urban_client.get_houses_from_territories(territory_id)).iterrows():
-            cur_year_houses = set()
-            for cur_year in range(year_begin+1, year_begin+years+1):
-                cur_year_houses.add(
+        """
+        get all house ids in urban_db for consistency
+        """
+        houses_df = await self.urban_client.get_houses_from_territories(territory_id)
+        houses_urban_db = set()
+        for _, house in houses_df.iterrows():
+            for _ in range(year_begin+1, year_begin+years+1):
+                houses_urban_db.add(
                     house["house_id"],
                 )
-            for cur_year in range(year_begin + 1, year_begin + years + 1):
-                building_ids_urban_api[cur_year] = cur_year_houses
 
-        for db_path, values in buildings_db_data.items():
-            year = next(iter(values)).year
-            buildings_ids[year] = buildings_ids[year] | building_ids_urban_api[year]
-
+        """
+        unite and pass together to be deleted from saving api for each year
+        """
+        for year, values in buildings_ids.items():
+            buildings_ids[year] = buildings_ids[year] | houses_urban_db
 
         logger = structlog.getLogger()
         logger.info(f"deleting previous forecasted data from previous runs")
         await self.saving_client.delete_forecasted_data(scenario, buildings_ids)
 
+        """
+        remove old dbs from calculation directory
+        """
         for db_path in buildings_db_data.keys():
             logger.info(f"deleting previous forecasted data, db_path: {{ {db_path} }}")
             try:

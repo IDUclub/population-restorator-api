@@ -21,7 +21,7 @@ COPY population-restorator-api-config.yaml /app/
 COPY app /app/app
 
 RUN chmod a+rwx /tmp && \
-    mkdir -p /app/logs /app/calculation_dbs
+    mkdir -p /app/logs /app/calculation_dbs /app/working_db
 
 RUN pip install .
 

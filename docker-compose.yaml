@@ -6,6 +6,7 @@ services:
     volumes:
       - ./logs:/app/logs
       - ./calculation_dbs:/app/calculation_dbs
+      - ./working_db:/app/working_db
     ports:
       - "8000:8000"
     depends_on:
