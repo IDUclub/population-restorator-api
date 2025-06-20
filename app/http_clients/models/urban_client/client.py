@@ -57,7 +57,7 @@ class UrbanClient(BaseClient):
         """
 
         # getting response
-        url = f"{self.config.host}/api/v1/all_territories"
+        url = f"{self.config.host}:{self.config.port}/api/v1/all_territories"
 
         params = {
             "parent_id": parent_id,
@@ -96,7 +96,7 @@ class UrbanClient(BaseClient):
         """
 
         # getting response
-        url = f"{self.config.host}/api/v1/territories/{territory_id}"
+        url = f"{self.config.host}:{self.config.port}/api/v1/territories/{territory_id}"
 
         params = {"territories_ids": territory_id, "centers_only": "true"}
 
@@ -133,7 +133,7 @@ class UrbanClient(BaseClient):
         """
 
         # getting response
-        url = f"{self.config.host}/api/v1/territories/{territory_id}"
+        url = f"{self.config.host}:{self.config.port}/api/v1/territories/{territory_id}"
 
         params = {"territories_ids": territory_id, "centers_only": "true"}
 
@@ -182,7 +182,7 @@ class UrbanClient(BaseClient):
 
         # getting response
 
-        url = f"{self.config.host}/api/v1/territory/indicator_values"
+        url = f"{self.config.host}:{self.config.port}/api/v1/territory/indicator_values"
         # todo add time
         params = {
             "parent_id": parent_id,
@@ -267,7 +267,7 @@ class UrbanClient(BaseClient):
 
         # getting response
 
-        url = f"{self.config.host}/api/v1/territory/{territory_parent_id}/physical_objects_geojson"
+        url = f"{self.config.host}:{self.config.port}/api/v1/territory/{territory_parent_id}/physical_objects_geojson"
 
         params = {
             "territory_id": territory_parent_id,
@@ -325,7 +325,7 @@ class UrbanClient(BaseClient):
         Returns: amount of people on this territory
         """
         # getting response
-        url = f"{self.config.host}/api/v1/territory/{territory_id}/indicator_values"
+        url = f"{self.config.host}:{self.config.port}/api/v1/territory/{territory_id}/indicator_values"
 
         params = {
             "territory_id": territory_id,

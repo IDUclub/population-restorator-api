@@ -22,9 +22,9 @@ def job_exception_handler(job, exc_type, exc_value, traceback):
     job.save_meta()
 
 
-def start_redis_queue(host: str, port: int, db: int):
+def start_redis_queue(host: str, port: int, db: int, queue_name: str):
     redis_conn = Redis(host=host, port=port, db=db)
-    queue = Queue(connection=redis_conn)
+    queue = Queue(queue_name, connection=redis_conn)
     return (redis_conn, queue)
 
 

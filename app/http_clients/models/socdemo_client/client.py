@@ -61,7 +61,7 @@ class SocDemoClient(BaseClient):
         }
 
         # getting response
-        url = f"{self.config.host}/indicators/{indicator_id}/{territory_id}/detailed"
+        url = f"{self.config.host}:{self.config.port}/indicators/{indicator_id}/{territory_id}/detailed"
         data = await handle_get_request(url, params, headers)
 
         if data is None:

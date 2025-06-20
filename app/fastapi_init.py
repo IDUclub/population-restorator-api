@@ -71,7 +71,7 @@ async def lifespan(app: FastAPI):
     )
 
     host, port, db, queue_name, workers_count = dataclasses.astuple(app_config.redis_queue)
-    app.state.redis, app.state.queue = start_redis_queue(host=host, port=port, db=db)
+    app.state.redis, app.state.queue = start_redis_queue(host=host, port=port, db=db, queue_name=queue_name)
     
     rq_worker_processes = [mp.Process(target=start_rq_worker, args=(host, port, db, queue_name)) for worker in range(workers_count)]
     for worker in range(workers_count):
