@@ -243,10 +243,9 @@ class TerritoriesService:
         houses_df = await self.urban_client.get_houses_from_territories(territory_id)
         houses_urban_db = set()
         for _, house in houses_df.iterrows():
-            for _ in range(year_begin+1, year_begin+years+1):
-                houses_urban_db.add(
-                    house["house_id"],
-                )
+            houses_urban_db.add(
+                house["house_id"],
+            )
 
         """
         unite and pass together to be deleted from saving api for each year
